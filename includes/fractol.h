@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/03 12:58:05 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/03 20:04:35 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct	s_complex
 	double	x;
 	double	y;
 }				t_complex;
+
+typedef struct	s_mouse_event
+{
+	t_complex	l_cursor;
+	int			mouse_press;
+	int			mouse_release;
+	int			btn_press;
+}				t_m_event;
+
 
 typedef struct	s_window
 {
@@ -52,6 +61,7 @@ typedef struct	s_window
 	int			color;
 	t_complex	c;
 	int			calc_ok;
+	t_m_event	mouse;
 }				t_window;
 
 

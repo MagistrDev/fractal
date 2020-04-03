@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/03 17:53:07 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/04 01:04:08 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		key_press(int key, t_window *win)
 		win->fractal = 1;
 	if (key == TWO)
 		win->fractal = 2;
+	if (key == THRE)
+		win->fractal = 3;
 	if (key == C)
 		win->color = (win->color) ? 0 : 0xffffff;
 	return (0);
@@ -33,17 +35,17 @@ int		key_press(int key, t_window *win)
 
 int		mouse_move(int x, int y, t_window *win)
 {
-	printf("%i\%i\n", x,y);
-	(void)x;
-	(void)y;
-	(void)win;
-	if (win->mouse_pres == 3)
+	if (win->calc_ok == 0)
+	{
+		if (win->mouse_pres == 3)
 		{
+			printf("%i/%i\n", x,y);
 			win->calc_ok = 1;
 			win->c.y = win->im_max - (win->d_im * y);
 			win->c.x = win->re_min + (win->d_re * x);
 			draw_fractal(win);
 		}
+	}
 	return(0);
 }
 
@@ -53,8 +55,9 @@ int		mouse_press(int button, int x, int y, t_window *win)
 	(void)y;
 	(void)button;
 	(void)win;
+	win->mouse.btn_press |= (1 << button);
 	if (button == 3)
-		win->mouse_pres = (win->mouse_pres == 3) ? 0 : 3;
+		win->mouse_pres = ((win->mouse_pres == 3) ? 0 : 3);
 	if (button == 1)
 	{
 		win->c.y = win->im_max - (win->d_im * y);
@@ -74,6 +77,7 @@ int		mouse_release(int button, int x, int y, t_window *win)
 	(void)y;
 	(void)button;
 	(void)win;
+	win->mouse.btn_press |= (1 << button); 
 	//if (button == 3)
 	//	win->mouse_pres = 0;
 	return(0);

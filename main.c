@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 14:19:06 by ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/03 17:42:43 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/04 01:40:16 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ void create_win(t_window *win, int argc, char **argv)
 		&win->size_line, &win->endian);
 	win->iter = 20;
 	win->btn_d = 0;
+	win->mouse_pres = 0;
+	mlx_do_key_autorepeaton(win->mlx_ptr);
 	mlx_hook(win->win_ptr, 4, (1L<<2), mouse_press, win);
 	mlx_hook(win->win_ptr, 5, (1L<<3), mouse_release, win);
-	win->calc_ok = 1;
-	if (win->calc_ok == 0)
-		mlx_hook(win->win_ptr, 6, (1L<<6), mouse_move, win);
+	mlx_hook(win->win_ptr, 6, (1L<<6), mouse_move, win);
 	mlx_hook(win->win_ptr, 2, 1, key_press, win);
+	
 	mlx_loop(win->mlx_ptr);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/03 17:43:02 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/04 01:38:47 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,23 @@ int		julia(t_complex c, t_window *win)
 	return (i);
 }
 
+int		burningship(t_complex c, t_window *win)
+{
+	t_complex	z;
+	float		d;
+	int			i;
+
+	z = (t_complex){.x = 0, .y = 0};
+	i = -1;
+	while (++i < win->iter && fabs(z.x - z.y) < 4)
+	{
+		d = z.x;
+		z.x = fabs(d * d) - z.y * z.y + c.x;
+		z.y = 2 * fabs(d * z.y) + c.y;
+	}
+	return (i);
+}
+
 void	draw_fractal(t_window *win)
 {
 	int			x;
@@ -87,6 +104,8 @@ void	draw_fractal(t_window *win)
 				i = mandelbrot(c, win);
 			if (win->fractal == 2)
 				i = julia(c, win);
+			if (win->fractal == 3)
+				i = burningship(c, win);
 			if (win->color)
 				color = (i == win->iter) ? win->color : 0;
 			else
