@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/03 17:49:09 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/03 17:53:07 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ int		mouse_release(int button, int x, int y, t_window *win)
 	//if (button == 3)
 	//	win->mouse_pres = 0;
 	return(0);
+
 }
