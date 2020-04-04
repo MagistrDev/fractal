@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/04 01:04:08 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/04 22:43:23 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,25 @@ int		key_press(int key, t_window *win)
 		win->fractal = 2;
 	if (key == THRE)
 		win->fractal = 3;
+	if (key == Q)
+	{
+		win->im_min = -2;
+		win->im_max = 2;
+		win->re_min = -2; 
+		win->re_max = 2;
+	}
 	if (key == C)
 		win->color = (win->color) ? 0 : 0xffffff;
+	if (key == NUMENT)
+	{
+		for (int bla = 0; bla < 600*600 ; bla++)
+		{
+			win->img_x[bla] = 0xff0000ff;
+			//win->img_x[bla] |= 128 << 16;
+		}
+		mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr_x, win->width >> 1, win->height >> 1);
+	}
+	draw_fractal(win);
 	return (0);
 }
 
@@ -63,11 +80,11 @@ int		mouse_press(int button, int x, int y, t_window *win)
 		win->c.y = win->im_max - (win->d_im * y);
 		win->c.x = win->re_min + (win->d_re * x);
 		win->mouse_pres = 1;
-		draw_fractal(win);
 	}
 	if (button == 4 || button == 5)
-		scale(x, y, button % 4, win);
+		scale(x, y, ((button % 4) ? -1 : 1), win);
 	printf("btn - %i x - %i y - %i\n",button, x, y);
+	draw_fractal(win);
 	return (0);
 }
 

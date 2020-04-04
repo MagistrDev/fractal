@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/04 01:38:47 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/04 23:08:33 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,14 @@ void	draw_fractal(t_window *win)
 
 void	scale(int x, int y, int sc, t_window *win)
 {
-	t_complex	c;
-	float		hop;
-	
-	c.y = win->im_max - (win->d_im * y);
-	c.x = win->re_min + (win->d_re * x);
-	(void)sc;
-	(void)c;
-	
-	hop = (win->im_max - win->im_min) * 0.975;
-	win->im_min += hop;
-	win->im_max -= hop;
-	hop = (win->re_max - win->re_min) * 0.975;
-	win->re_min += hop;
-	win->re_max -= hop;
-	win->d_re = (win->re_max - win->re_min) / win->width;
-	win->d_im = (win->im_max - win->im_min) / win->height;
+	float	tmp;
+
+	tmp = win->d_re * (1 - win->scale * sc);
+	win->re_min += tmp * (x * win->d_re / tmp - x);
+	win->d_re = tmp;
+	win->re_max = win->re_min + win->d_re * win->width;
+	tmp = win->d_im * (1 - win->scale * sc);
+	win->im_max -= tmp * (y * win->d_im / tmp - y);
+	win->d_im = tmp;
+	win->im_min = win->im_max - win->d_im * win->height;
 }
