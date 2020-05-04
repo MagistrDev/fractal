@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ecelsa <studen21-school.ru>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 09:55:36 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 16:28:36 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,12 @@ int		key_press(int key, t_window *win)
 
 int		mouse_move(int x, int y, t_window *win)
 {
-	if (win->calc_ok == 0)
+	if (win->mouse_pres == 3)
 	{
-		if (win->mouse_pres == 3)
-		{
-			win->calc_ok = 1;
-			win->c.y = win->im_max - (win->d_im * y);
-			win->c.x = win->re_min + (win->d_re * x);
-			draw_fractal(win);
-		}
+		win->calc_ok = 1;
+		win->c.y = win->im_max - (win->d_im * y);
+		win->c.x = win->re_min + (win->d_re * x);
+		draw_fractal(win);
 	}
 	return(0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ecelsa <studen21-school.ru>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 09:41:40 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 18:15:11 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@ int		col_iter(int i, t_window *win)
 	color |= ((int)(8.5 * pow((1 - t), 3) * t * 255));
 	return (color);	
 }
+
+/*
+** sqr(Z) + c
+*/
+
+int		any_fractal(t_complex c, t_window *win)
+{
+	t_complex	z;
+	float		d;
+	int			i;
+
+	z = c;
+	i = -1;
+	while (++i < win->iter && fabs(z.x - z.y) < 4)
+	{
+		d = z.x * z.x - z.y * z.y + win->c.x;
+		z.y = 2 * z.x * z.y + win->c.y;
+		z.x = d;
+	}
+	return (i);
+}
+
+/*
+** Z' = pow(Z,2) + c; c' = c/2 + Z'
+*/
 
 int		mandelbrot(t_complex c, t_window *win)
 {
@@ -50,6 +75,9 @@ int		mandelbrot(t_complex c, t_window *win)
 	return (i);
 }
 
+/*
+** Zn+1 = sqr(Zn) + c
+*/
 int		julia(t_complex c, t_window *win)
 {
 	t_complex	z;
@@ -93,6 +121,7 @@ void	draw_fractal(t_window *win)
 	int			color;
 	t_complex	c;
 
+	mlx_do_sync(win->mlx_ptr);
 	y = -1;
 	while (++y <= win->height)
 	{
@@ -116,6 +145,7 @@ void	draw_fractal(t_window *win)
 	}
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	win->calc_ok = 0;
+	mlx_do_sync(win->mlx_ptr);
 }
 
 void	scale(int x, int y, int sc, t_window *win)

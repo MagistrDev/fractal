@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ecelsa <studen21-school.ru>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 14:19:06 by ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 09:54:34 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 16:26:26 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol.h" 
 
 #include <pthread.h>
 
