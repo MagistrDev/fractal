@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecelsa <studen21-school.ru>                +#+  +:+       +#+        */
+/*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 18:15:11 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 21:10:59 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 int		col_iter(int i, t_window *win)
 {
 	int		color;
-	float	t = (float)i / (float)win->iter;
-	
+	float	t;
+
+	t = (float)i / (float)win->iter;
 	color = ((int)(9 * (1 - t) * pow(t, 3) * 255)) << 16;
 	color |= ((int)(15 * pow((1 - t), 2) * pow(t, 2) * 255)) << 8;
 	color |= ((int)(8.5 * pow((1 - t), 3) * t * 255));
-	return (color);	
+	return (color);
 }
 
 /*
@@ -78,6 +79,7 @@ int		mandelbrot(t_complex c, t_window *win)
 /*
 ** Zn+1 = sqr(Zn) + c
 */
+
 int		julia(t_complex c, t_window *win)
 {
 	t_complex	z;
@@ -111,7 +113,6 @@ int		burningship(t_complex c, t_window *win)
 	}
 	return (i);
 }
-
 
 void	draw_fractal(t_window *win)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecelsa <studen21-school.ru>                +#+  +:+       +#+        */
+/*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 16:28:36 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 23:28:18 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		key_press(int key, t_window *win)
 	(void)win;
 	if (key == ESC)
 		exit(0);
-	if (key == NUMPLU)
+	if (key == KEY_NUMPLU)
 		win->iter += 5;
-	if (key == NUMMIN)
+	if (key == KEY_NUMMIN)
 		win->iter -= 5;
 	if (key == ONE)
 		win->fractal = 1;
@@ -28,14 +28,14 @@ int		key_press(int key, t_window *win)
 		win->fractal = 2;
 	if (key == THRE)
 		win->fractal = 3;
-	if (key == Q)
+	if (key == KEY_Q)
 	{
 		win->im_min = -2;
 		win->im_max = 2;
-		win->re_min = -2; 
+		win->re_min = -2;
 		win->re_max = 2;
 	}
-	if (key == C)
+	if (key == KEY_C)
 		win->color = (win->color) ? 0 : 0xffffff;
 	draw_fractal(win);
 	return (0);
@@ -50,7 +50,7 @@ int		mouse_move(int x, int y, t_window *win)
 		win->c.x = win->re_min + (win->d_re * x);
 		draw_fractal(win);
 	}
-	return(0);
+	return (0);
 }
 
 int		mouse_press(int button, int x, int y, t_window *win)
@@ -74,11 +74,7 @@ int		mouse_release(int button, int x, int y, t_window *win)
 {
 	(void)x;
 	(void)y;
-
 	(void)win;
-	win->mouse.btn_press |= (1 << button); 
-	//if (button == 3)
-	//	win->mouse_pres = 0;
-	return(0);
-
+	win->mouse.btn_press |= (1 << button);
+	return (0);
 }

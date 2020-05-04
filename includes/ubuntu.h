@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ubuntu.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/02 16:35:42 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 23:27:17 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,49 @@
 # define DOWN	65364
 # define LEFT	65361
 # define RIGHT	65363
-# define Q		113
-# define W		119
-# define E		101
-# define R		114
-# define T		116
-# define Y		121
-# define U		117
-# define I		105
-# define O		111
-# define P		112
-# define A		97
-# define S		115
-# define D		100
-# define F		102
-# define G		103
-# define H		104
-# define J		106
-# define K		107
-# define L		108
-# define Z		122
-# define X		120
-# define C		99
-# define V		118
-# define B		98
-# define N		110
-# define M		109
-# define NUM1	65436
-# define NUM2	65433
-# define NUM3	65435
-# define NUM4	65430
-# define NUM5	65437
-# define NUM6	65432
-# define NUM7	65429
-# define NUM8	65431
-# define NUM9	65434
-# define NUM0	65438
-# define NUMPLU	65451
-# define NUMMIN	65453
-# define NUMENT	65421
-# define NUMPOW	65450
-# define NUMDIV	65455
-# define NUMLOC	65407
-# define NUMDOT	65439
+# define KEY_Q		113
+# define KEY_W		119
+# define KEY_E		101
+# define KEY_R		114
+# define KEY_T		116
+# define KEY_Y		121
+# define KEY_U		117
+# define KEY_I		105
+# define KEY_O		111
+# define KEY_P		112
+# define KEY_A		97
+# define KEY_S		115
+# define KEY_D		100
+# define KEY_F		102
+# define KEY_G		103
+# define KEY_H		104
+# define KEY_J		106
+# define KEY_K		107
+# define KEY_L		108
+# define KEY_Z		122
+# define KEY_X		120
+# define KEY_C		99
+# define KEY_V		118
+# define KEY_B		98
+# define KEY_N		110
+# define KEY_M		109
+# define KEY_NUM1	65436
+# define KEY_NUM2	65433
+# define KEY_NUM3	65435
+# define KEY_NUM4	65430
+# define KEY_NUM5	65437
+# define KEY_NUM6	65432
+# define KEY_NUM7	65429
+# define KEY_NUM8	65431
+# define KEY_NUM9	65434
+# define KEY_NUM0	65438
+# define KEY_NUMPLU	65451
+# define KEY_NUMMIN	65453
+# define KEY_NUMENT	65421
+# define KEY_NUMPOW	65450
+# define KEY_NUMDIV	65455
+# define KEY_NUMLOC	65407
+# define KEY_NUMDOT	65439
 # define UP		65362
 # define DOWN	65364
 # define LEFT	65361

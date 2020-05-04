@@ -26,13 +26,13 @@ all: $(NAME)
 
 
 $(NAME): $(SRCS:.c=.o)
-#	@make -C libft/
+	@make -C libft/
 #	@make -C minilibxX11
 #	$(CC) $(FLAGS) $(MINILIBX) $(INCLUDES) $(LIBS) $(addprefix $(OBJ_DIR),$(notdir $(SRCS:.c=.o))) -o $(NAME)
-	$(CC) $(FLAGS) $(addprefix $(OBJ_DIR),$(notdir $(SRCS:.c=.o))) $(LIBS) $(MINILIBX) -o $(NAME)
+	$(CC) $(FLAGS) $(addprefix $(OBJ_DIR),$(notdir $(SRCS:.c=.o))) $(LIB_FT) $(LIBS) $(MINILIBX) -o $(NAME)
 
 %.o : %.c
-	$(CC) -c $(FLAGS) $(MINILIBX) $(LIB_FT) $(INCLUDES) $(LIBS) $< $(INCLUDES) -o $(addprefix $(OBJ_DIR),$(notdir $@))
+	$(CC) -c $(FLAGS) $(MINILIBX) $(LIB_FT) $(INCLUDES) $< $(INCLUDES) $(LIBS) -o $(addprefix $(OBJ_DIR),$(notdir $@))
 	
 clean:
 #	@make -C minilibxX11 clean

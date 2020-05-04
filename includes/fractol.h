@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/05 14:57:06 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 21:22:33 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,25 @@
 
 typedef unsigned char	t_uchar;
 
-typedef struct	s_complex
+typedef struct			s_complex
 {
 	double	x;
 	double	y;
-}				t_complex;
+}						t_complex;
 
-typedef struct	s_mouse_event
+typedef struct			s_mouse_event
 {
 	t_complex	l_cursor;
 	int			mouse_press;
 	int			mouse_release;
 	int			btn_press;
-}				t_m_event;
+}						t_m_event;
 
-
-typedef struct	s_window
+typedef struct			s_window
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*img_ptr; 
+	void		*img_ptr;
 	int			*img;
 	int			width;
 	int			height;
@@ -64,14 +63,13 @@ typedef struct	s_window
 	t_complex	c;
 	int			calc_ok;
 	t_m_event	mouse;
-}				t_window;
+}						t_window;
 
-
-int		key_press(int key, t_window *win);
-int		mouse_move(int x, int y, t_window *win);
-int		mouse_press(int button, int x, int y, t_window *win);
-int		mouse_release(int button, int x, int y, t_window *win);
-void	draw_fractal(t_window *win);
-void	scale(int x, int y, int sc, t_window *win);
+int						key_press(int key, t_window *win);
+int						mouse_move(int x, int y, t_window *win);
+int						mouse_press(int button, int x, int y, t_window *win);
+int						mouse_release(int button, int x, int y, t_window *win);
+void					draw_fractal(t_window *win);
+void					scale(int x, int y, int sc, t_window *win);
 
 #endif

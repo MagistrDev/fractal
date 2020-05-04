@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mac.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/01 16:02:12 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 21:19:42 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAC_H
 # define MAC_H
-
 
 #endif
