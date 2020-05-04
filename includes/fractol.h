@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/04 22:41:17 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/04/05 14:57:06 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
+# include <pthread.h>
 # include "mlx.h"
 # include "libft.h"
 # include "ubuntu.h"
@@ -43,8 +44,6 @@ typedef struct	s_window
 	void		*win_ptr;
 	void		*img_ptr; 
 	int			*img;
-	void		*img_ptr_x; 
-	int			*img_x;
 	int			width;
 	int			height;
 	float		re_min;

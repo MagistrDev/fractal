@@ -6,7 +6,7 @@
 /*   By: Ecelsa <ecelsa@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/04/04 23:08:33 by Ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/04 09:41:40 by Ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,11 @@ int		burningship(t_complex c, t_window *win)
 	{
 		d = z.x;
 		z.x = fabs(d * d) - z.y * z.y + c.x;
-		z.y = 2 * fabs(d * z.y) + c.y;
+		z.y = 2 * fabs(d * z.y) - c.y;
 	}
 	return (i);
 }
+
 
 void	draw_fractal(t_window *win)
 {
