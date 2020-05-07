@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 23:28:18 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/07 20:43:20 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		key_press(int key, t_window *win)
 		win->fractal = 2;
 	if (key == THRE)
 		win->fractal = 3;
+	if (key == FOUR)
+		win->fractal = 4;
 	if (key == KEY_Q)
 	{
 		win->im_min = -2;
@@ -43,6 +45,7 @@ int		key_press(int key, t_window *win)
 
 int		mouse_move(int x, int y, t_window *win)
 {
+	t_complex	c;
 	if (win->mouse_pres == 3)
 	{
 		win->calc_ok = 1;
@@ -50,6 +53,10 @@ int		mouse_move(int x, int y, t_window *win)
 		win->c.x = win->re_min + (win->d_re * x);
 		draw_fractal(win);
 	}
+	c.y = win->im_max - (win->d_im * y);
+	c.x = win->re_min + (win->d_re * x);
+	(void)c;
+	printf("%d %d | %i %i %i\n",x, y, mandelbrot(c, win), (int)((float)mandelbrot(c, win)/(float)win->iter *255), man_smooth(c,win));
 	return (0);
 }
 

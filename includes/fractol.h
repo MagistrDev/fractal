@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 21:22:33 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/07 20:43:14 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,8 @@ int						mouse_press(int button, int x, int y, t_window *win);
 int						mouse_release(int button, int x, int y, t_window *win);
 void					draw_fractal(t_window *win);
 void					scale(int x, int y, int sc, t_window *win);
+int						mandelbrot(t_complex c, t_window *win);
+int						smooth_color(t_complex p, float iter, t_window *win);
+int		man_smooth(t_complex c, t_window *win);
 
 #endif

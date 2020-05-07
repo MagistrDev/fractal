@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/04 21:10:59 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/07 23:17:23 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,66 @@ int		col_iter(int i, t_window *win)
 	float	t;
 
 	t = (float)i / (float)win->iter;
-	color = ((int)(9 * (1 - t) * pow(t, 3) * 255)) << 16;
-	color |= ((int)(15 * pow((1 - t), 2) * pow(t, 2) * 255)) << 8;
-	color |= ((int)(8.5 * pow((1 - t), 3) * t * 255));
+	color = ((int)(9 * (1 - t) * t * t * t * 255)) << 16;
+	color |= ((int)(15 * (1 - t) * (1 - t) * t * t * 255)) << 8;
+	color |= ((int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255));
 	return (color);
 }
 
-/*
-** sqr(Z) + c
-*/
+int		smooth_color(t_complex p, float iter, t_window *win)
+{
+	int		color;
+	float	t;
 
-int		any_fractal(t_complex c, t_window *win)
+	/*
+	double i;
+	double zn;
+	double nu;
+	zn = log(p.x * p.x + p.y * p.y) / 2.0f;
+	nu = log(zn / log(2)) / log(2);
+	i = p.y + 1 - nu;
+	if (i < 0)
+		i = 0;*/
+	iter = iter - log(log(p.x * p.x + p.y * p.y) / log(2)) / log(2);
+	t = iter / (float)win->iter;
+	color = ((int)(9 * (1 - t) * t * t * t * 255)) << 16;
+	color |= ((int)(15 * (1 - t) * (1 - t) * t * t * 255)) << 8;
+	color |= ((int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255));
+	return (color);
+}
+
+int		man_smooth(t_complex c, t_window *win)
 {
 	t_complex	z;
 	float		d;
-	int			i;
+	float		i;
+	float		t;
+	float		sn;
+	int		bla;
 
 	z = c;
 	i = -1;
-	while (++i < win->iter && fabs(z.x - z.y) < 4)
+	while (++i < win->iter && (z.x * z.x + z.y * z.y) <= 4)
 	{
-		d = z.x * z.x - z.y * z.y + win->c.x;
-		z.y = 2 * z.x * z.y + win->c.y;
+		d = z.x * z.x - z.y * z.y + c.x;
+		z.y = 2 * z.x * z.y + c.y;
 		z.x = d;
 	}
-	return (i);
+	sn = logf(logf(z.x * z.x + z.y * z.y) / logf(2)) / logf(2);
+	//i = fabs(i - ((i < sn) ? 0 : sn));
+	t = i / (float)win->iter;
+	/*
+	*/
+	(void)t;
+	(void)bla;
+	sn = ((sn > 2.0) ? 2.0 : sn) - 1;
+	//printf("<%f %f %f %f> \t",sn, (1.0 - sn),(1.0 - sn) / 2.0,255*(1.0f/(float)win->iter*(1.0 - sn) / 1.0 + t));
+	//bla = (i /(float)win->iter)*255;
+	t = (t > 0.998) ? 0.998 : (1.0f/(float)win->iter*(1.0 - sn) / 1.0 + t);
+	bla = ((int)(9 * (1 - t) * t * t * t * 255)) << 16;
+	bla |= ((int)(15 * (1 - t) * (1 - t) * t * t * 255)) << 8;
+	bla |= ((int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255));
+	return (bla);
 }
 
 /*
@@ -66,7 +101,7 @@ int		mandelbrot(t_complex c, t_window *win)
 	if (ro > ro_c)
 	{
 		i = -1;
-		while (++i < win->iter && fabs(z.x - z.y) < 4)
+		while (++i < win->iter && fabs(z.x * z.x + z.y * z.y) <= 4)
 		{
 			d = z.x * z.x - z.y * z.y + c.x;
 			z.y = 2 * z.x * z.y + c.y;
@@ -75,6 +110,7 @@ int		mandelbrot(t_complex c, t_window *win)
 	}
 	return (i);
 }
+
 
 /*
 ** Zn+1 = sqr(Zn) + c
@@ -88,7 +124,7 @@ int		julia(t_complex c, t_window *win)
 
 	z = c;
 	i = -1;
-	while (++i < win->iter && fabs(z.x - z.y) < 4)
+	while (++i < win->iter && fabs(z.x - z.y) < 5)
 	{
 		d = z.x * z.x - z.y * z.y + win->c.x;
 		z.y = 2 * z.x * z.y + win->c.y;
@@ -118,7 +154,7 @@ void	draw_fractal(t_window *win)
 {
 	int			x;
 	int			y;
-	int			i;
+	int			i =0;
 	int			color;
 	t_complex	c;
 
@@ -137,10 +173,12 @@ void	draw_fractal(t_window *win)
 				i = julia(c, win);
 			if (win->fractal == 3)
 				i = burningship(c, win);
-			if (win->color)
-				color = (i == win->iter) ? win->color : 0;
-			else
-				color = col_iter(i, win);
+			//if (win->color)
+			//	color = (i == win->iter) ? win->color : 0;
+			color = col_iter(i, win);
+			if (win->fractal == 4)
+				color = man_smooth(c, win);
+			
 			win->img[y * win->width + x] = color;
 		}
 	}
