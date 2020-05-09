@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 15:07:02 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 20:29:09 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,30 @@ typedef struct			s_color
 	int			func;
 }						t_color;
 
+typedef struct			s_thread
+{
+	pthread_t		tid;
+	pthread_attr_t	attr;
+}						t_thread;
+
+
 typedef struct			s_window
 {
+	t_thread	tread[16];
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
 	int			*img;
 	int			width;
 	int			height;
-	float		re_min;
-	float		re_max;
-	float		d_re;
-	float		im_min;
-	float		im_max;
-	float		d_im;
+	double		re_min;
+	double		re_max;
+	double		d_re;
+	double		im_min;
+	double		im_max;
+	double		d_im;
 	int			fractal;
-	float		scale;
+	double		scale;
 	int			bpp;
 	int			btn_d;
 	int			size_line;
@@ -73,7 +81,7 @@ typedef struct			s_window
 	int			calc_ok;
 	t_m_event	mouse;
 }						t_window;
-
+ 
 int						key_press(int key, t_window *win);
 int						mouse_move(int x, int y, t_window *win);
 int						mouse_press(int button, int x, int y, t_window *win);

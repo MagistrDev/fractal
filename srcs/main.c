@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 14:19:06 by ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 15:25:17 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 16:55:51 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,17 @@ void	*potok2(void *www)
 int		main(int argc, char **argv)
 {
 	t_window		win;
-	pthread_t		tid;
-	pthread_attr_t	attr;
-	
+	t_thread		t[3];
+		
 	create_win(&win, argc, argv);
-	pthread_attr_init(&attr);
-	pthread_create(&tid, &attr, potok, (void*)&win);
+	pthread_attr_init(&t[0].attr);
+	pthread_create(&t[0].tid, &t[0].attr, potok, (void*)&win);
 	
-	pthread_t		tid2;
-	pthread_attr_t	attr2;
-	pthread_attr_init(&attr2);
-	pthread_create(&tid2, &attr2, potok2, (void*)&win);
+	pthread_attr_init(&t[1].attr);
+	pthread_create(&t[1].tid, &t[1].attr, potok2, (void*)&win);
 	
-	pthread_join(tid, NULL);
-	pthread_join(tid2, NULL);
+	pthread_join(t[0].tid, NULL);
+	pthread_join(t[1].tid, NULL);
 	
 	return (0);
 }

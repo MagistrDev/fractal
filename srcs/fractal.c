@@ -6,20 +6,20 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 15:21:07 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 17:38:57 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		col_iter(float i, t_window *win)
+int		col_iter(double i, t_window *win)
 {
 	t_complex	z;
 	int			color;
-	float		sn;
-	float		t;
+	double		sn;
+	double		t;
 
-	t = i / (float)win->iter;
+	t = i / (double)win->iter;
 	if (win->color.smooth)
 	{
 		z = win->color.z;
@@ -48,17 +48,17 @@ int		if_func(t_complex z, t_window *win)
 	if (win->color.func == 1)
 		ret = (z.x * z.x - z.y * z.y <= 4) ? 1 : 0;
 	if (win->color.func == 2)
-		ret = (fabs(z.x - z.y) <= 4) ? 1 : 0;
+		ret = (fabsl(z.x - z.y) <= 4) ? 1 : 0;
 	return (ret);
 }
 
 int		mandelbrot(t_complex c, t_window *win)
 {
 	t_complex	z;
-	float		ro_c;
-	float		teta;
-	float		ro;
-	float		d;
+	double		ro_c;
+	double		teta;
+	double		ro;
+	double		d;
 	int			i;
 
 	z = c;
@@ -87,7 +87,7 @@ int		mandelbrot(t_complex c, t_window *win)
 int		julia(t_complex c, t_window *win)
 {
 	t_complex	z;
-	float		d;
+	double		d;
 	int			i;
 
 	z = c;
@@ -105,7 +105,7 @@ int		julia(t_complex c, t_window *win)
 int		burningship(t_complex c, t_window *win)
 {
 	t_complex	z;
-	float		d;
+	double		d;
 	int			i;
 
 	z = (t_complex){.x = 0, .y = 0};
@@ -113,8 +113,8 @@ int		burningship(t_complex c, t_window *win)
 	while (++i < win->iter && if_func(z, win))
 	{
 		d = z.x;
-		z.x = fabs(d * d) - z.y * z.y + c.x;
-		z.y = 2 * fabs(d * z.y) - c.y;
+		z.x = fabsl(d * d) - z.y * z.y + c.x;
+		z.y = 2 * fabsl(d * z.y) - c.y;
 	}
 	win->color.z = z;
 	return (i);
@@ -124,11 +124,8 @@ void	draw_fractal(t_window *win)
 {
 	int			color;
 	t_complex	pt;
-	// int			x;
-	// int			y;
 	t_complex	c;
 
-	//mlx_do_sync(win->mlx_ptr);
 	color = 0;
 	pt.y = -1;
 	XSync(((t_xvar*)(win->mlx_ptr))->display, True);
@@ -148,14 +145,13 @@ void	draw_fractal(t_window *win)
 			win->img[(int)(pt.y * win->width + pt.x)] = color;
 		}
 	}	
-	//mlx_do_sync(win->mlx_ptr);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	win->calc_ok++;
 }
 
 void	scale(int x, int y, int sc, t_window *win)
 {
-	float	tmp;
+	double	tmp;
 
 	tmp = win->d_re * (1 - win->scale * sc);
 	win->re_min += tmp * (x * win->d_re / tmp - x);
