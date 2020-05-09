@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 12:11:40 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 12:27:38 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	draw_fractal(t_window *win)
 	}
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	win->calc_ok = 0;
-	mlx_do_sync(win->mlx_ptr);
+	//mlx_do_sync(win->mlx_ptr);
 }
 
 void	scale(int x, int y, int sc, t_window *win)

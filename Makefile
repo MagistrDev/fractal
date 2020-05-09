@@ -4,7 +4,7 @@ NAME = fractol
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -g -O3
+FLAGS = -Wall -Wextra -Werror -g 
 
 INCLUDES = -I./includes
 
