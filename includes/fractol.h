@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 21:13:02 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 21:38:05 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 # include "mlx.h"
 # include "mlx_int.h"
 # include "libft.h"
-# include "ubuntu.h"
+# ifdef __unix__
+#  include "ubuntu.h"
+# elif __APPLE__
+#  include "mac.h"
+# endif
 
 typedef unsigned char	t_uchar;
 
