@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/07 20:43:14 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 12:13:51 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@
 # include <pthread.h>
 # include "mlx.h"
 # include "libft.h"
-# include "ubuntu.h"
+# ifdef __unix__
+#  include "ubuntu.h"
+# elif __APPLE__
+#  include "mac.h"
+# endif
+
 
 typedef unsigned char	t_uchar;
 
 typedef struct			s_complex
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }						t_complex;
 
 typedef struct			s_mouse_event
@@ -36,6 +41,14 @@ typedef struct			s_mouse_event
 	int			mouse_release;
 	int			btn_press;
 }						t_m_event;
+
+typedef struct			s_color
+{
+	int			color;
+	int			smooth;
+	t_complex	z;
+	int			func;
+}						t_color;
 
 typedef struct			s_window
 {
@@ -59,7 +72,7 @@ typedef struct			s_window
 	int			endian;
 	int			iter;
 	int			mouse_pres;
-	int			color;
+	t_color		color;
 	t_complex	c;
 	int			calc_ok;
 	t_m_event	mouse;
@@ -71,8 +84,5 @@ int						mouse_press(int button, int x, int y, t_window *win);
 int						mouse_release(int button, int x, int y, t_window *win);
 void					draw_fractal(t_window *win);
 void					scale(int x, int y, int sc, t_window *win);
-int						mandelbrot(t_complex c, t_window *win);
-int						smooth_color(t_complex p, float iter, t_window *win);
-int		man_smooth(t_complex c, t_window *win);
 
 #endif
