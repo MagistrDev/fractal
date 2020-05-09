@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 06:48:56 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:27:21 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		key_press(int key, t_window *win)
 	(void)win;
 	if (key == ESC)
 		exit(0);
-	if (key == KEY_NUMPLU)
+	if (key == KEY_NUMPLU || key == ZERO)
 		win->iter += 5;
-	if (key == KEY_NUMMIN)
+	if (key == KEY_NUMMIN || key == NINE)
 		win->iter -= (win->iter < 10) ? 0 : 5;
 	if (key == ONE)
 		win->fractal = 1;
@@ -49,11 +49,11 @@ int		mouse_move(int x, int y, t_window *win)
 {
 	if (win->mouse_pres == 3)
 	{
-		win->calc_ok = 1;
 		win->c.y = win->im_max - (win->d_im * y);
 		win->c.x = win->re_min + (win->d_re * x);
 		draw_fractal(win);
 	}
+	//mlx_do_sync(win->mlx_ptr);
 	return (0);
 }
 

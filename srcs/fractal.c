@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 12:27:38 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:21:07 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,33 +123,34 @@ int		burningship(t_complex c, t_window *win)
 void	draw_fractal(t_window *win)
 {
 	int			color;
-	//t_complex	pt;
-	int			x;
-	int			y;
+	t_complex	pt;
+	// int			x;
+	// int			y;
 	t_complex	c;
 
 	//mlx_do_sync(win->mlx_ptr);
 	color = 0;
-	y = -1;
-	while (++y <= win->height)
+	pt.y = -1;
+	XSync(((t_xvar*)(win->mlx_ptr))->display, True);
+	while (++pt.y <= win->height)
 	{
-		x = -1;
-		while (++x <= win->width)
+		pt.x = -1;
+		while (++pt.x <= win->width)
 		{
-			c.y = win->im_max - (win->d_im * y);
-			c.x = win->re_min + (win->d_re * x);
+			c.y = win->im_max - (win->d_im * pt.y);
+			c.x = win->re_min + (win->d_re * pt.x);
 			if (win->fractal == 1)
 				color = col_iter(mandelbrot(c, win), win);
 			if (win->fractal == 2)
 				color = col_iter(julia(c, win), win);
 			if (win->fractal == 3)
 				color = col_iter(burningship(c, win), win);
-			win->img[(int)(y * win->width + x)] = color;
+			win->img[(int)(pt.y * win->width + pt.x)] = color;
 		}
-	}
-	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
-	win->calc_ok = 0;
+	}	
 	//mlx_do_sync(win->mlx_ptr);
+	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
+	win->calc_ok++;
 }
 
 void	scale(int x, int y, int sc, t_window *win)

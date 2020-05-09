@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 12:16:05 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:07:02 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include "mlx.h"
+# include "mlx_int.h"
 # include "libft.h"
 # include "ubuntu.h"
-
-
 
 typedef unsigned char	t_uchar;
 
 typedef struct			s_complex
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }						t_complex;
 
 typedef struct			s_mouse_event

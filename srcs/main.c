@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 14:19:06 by ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 04:33:03 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:25:17 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,43 @@ void	*potok(void *www)
 	pthread_exit(0);
 }
 
+void	*potok2(void *www)
+{
+	t_window	*win;
+	time_t		t;
+	
+	t = time(0);
+	win = (t_window*)www;
+	(void)win;
+	while (1)
+	{
+		if (t != time(0))
+		{
+			t = time(0);
+			printf("%ld %i\n",time(0), win->calc_ok);
+			win->calc_ok = 0;
+		}
+	}
+	pthread_exit(0);
+}
+
 int		main(int argc, char **argv)
 {
 	t_window		win;
 	pthread_t		tid;
 	pthread_attr_t	attr;
-
+	
 	create_win(&win, argc, argv);
 	pthread_attr_init(&attr);
 	pthread_create(&tid, &attr, potok, (void*)&win);
+	
+	pthread_t		tid2;
+	pthread_attr_t	attr2;
+	pthread_attr_init(&attr2);
+	pthread_create(&tid2, &attr2, potok2, (void*)&win);
+	
 	pthread_join(tid, NULL);
+	pthread_join(tid2, NULL);
+	
 	return (0);
 }
