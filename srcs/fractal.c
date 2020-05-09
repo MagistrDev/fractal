@@ -6,11 +6,40 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 17:38:57 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 23:08:07 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	set_fractal(int key, t_window *win)
+{
+	win->im_min = -2;
+	win->im_max = 2;
+	win->re_min = -2;
+	win->re_max = 2;
+	win->d_re = (win->re_max - win->re_min) / win->width;
+	win->d_im = (win->im_max - win->im_min) / win->height;
+	win->c = (t_complex){0, 0};
+	win->color.z = (t_complex){0, 0};
+	win->color.color = 0xffffff;
+	win->iter = 25;
+	if (key == ONE)
+	{
+		win->fractal = 1;
+		win->mouse_pres = 0;
+	}
+	if (key == TWO)
+	{
+		win->fractal = 2;
+		win->mouse_pres = 3;
+	}
+	if (key == THRE)
+	{
+		win->fractal = 3;
+		win->mouse_pres = 0;
+	}
+}
 
 int		col_iter(double i, t_window *win)
 {
@@ -30,7 +59,6 @@ int		col_iter(double i, t_window *win)
 	color = ((int)(9 * (1 - t) * t * t * t * 255)) << 16;
 	color |= ((int)(15 * (1 - t) * (1 - t) * t * t * 255)) << 8;
 	color |= ((int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255));
-	//color |= (int)(sinf(3.8f * t - 3.1f) * sinf(3.8f * t - 3.1f) * 255);
 	return (color);
 }
 
@@ -55,26 +83,17 @@ int		if_func(t_complex z, t_window *win)
 int		mandelbrot(t_complex c, t_window *win)
 {
 	t_complex	z;
-	double		ro_c;
-	double		teta;
-	double		ro;
 	double		d;
 	int			i;
 
 	z = c;
-	ro = sqrtf((c.x - 0.25) * (c.x - 0.25) + c.y * c.y);
-	teta = atan2f(c.y, c.x - 0.25);
-	ro_c = 0.5 - 0.5 * cosf(teta);
 	i = win->iter;
-	if (ro > ro_c)
+	i = -1;
+	while (++i < win->iter && if_func(z, win))
 	{
-		i = -1;
-		while (++i < win->iter && if_func(z, win))
-		{
-			d = z.x * z.x - z.y * z.y + c.x;
-			z.y = 2 * z.x * z.y + c.y;
-			z.x = d;
-		}
+		d = z.x * z.x - z.y * z.y + c.x;
+		z.y = 2 * z.x * z.y + c.y;
+		z.x = d;
 	}
 	win->color.z = z;
 	return (i);
@@ -144,7 +163,7 @@ void	draw_fractal(t_window *win)
 				color = col_iter(burningship(c, win), win);
 			win->img[(int)(pt.y * win->width + pt.x)] = color;
 		}
-	}	
+	}
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img_ptr, 0, 0);
 	win->calc_ok++;
 }

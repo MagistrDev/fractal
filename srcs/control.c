@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 19:23:19 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/09 23:00:28 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 int		key_press(int key, t_window *win)
 {
-	(void)key;
-	(void)win;
 	if (key == ESC)
 		exit(0);
 	if (key == KEY_NUMPLU || key == ZERO)
 		win->iter += 5;
 	if (key == KEY_NUMMIN || key == NINE)
 		win->iter -= (win->iter < 10) ? 0 : 5;
-	if (key == ONE)
-		win->fractal = 1;
-	if (key == TWO)
-	{
-		win->fractal = 2;
-		win->mouse_pres = 3;
-	}
-	if (key == THRE)
-		win->fractal = 3;
+	if (key == ONE || key == TWO || key == THRE)
+		set_fractal(key, win);
 	if (key == KEY_S)
 		win->color.smooth = (win->color.smooth) ? 0 : 1;
 	if (key == KEY_W)
@@ -72,7 +63,7 @@ int		mouse_press(int button, int x, int y, t_window *win)
 	draw_fractal(win);
 	return (0);
 }
- 
+
 int		mouse_release(int button, int x, int y, t_window *win)
 {
 	(void)x;
