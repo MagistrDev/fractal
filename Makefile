@@ -10,7 +10,6 @@ LIB_FT = -I./libft -L./libft -lft
 SRCS_DIR = srcs/
 SRCS =  fractal.c main.c control.c
 MINILIBX = -L./minilibxX11/ -I./minilibxX11/ -lmlx -lXext -lX11 
-
 .PHONY: all clean fclean re
 
 all: $(NAME) 
@@ -22,7 +21,7 @@ $(NAME):  $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 	@make -C minilibxX11/ -f Makefile.gen
 	$(CC) $(FLAGS) $(addprefix $(OBJ_DIR),$(SRCS:.c=.o)) $(LIB_FT) $(LIBS) $(MINILIBX) -o $(NAME)
 
-$(addprefix $(OBJ_DIR), %.o) : $(addprefix $(SRCS_DIR),%.c)  
+$(addprefix $(OBJ_DIR), %.o) : $(addprefix $(SRCS_DIR),%.c) $(wildcard)
 	$(CC) -c -MMD $(FLAGS) $(MINILIBX) $(LIB_FT) $(INCLUDES) $(LIBS) $< -o $@
 
 clean:
@@ -35,3 +34,5 @@ fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
+
+include $(wildcard $(OBJ_DIR)*.d) 
