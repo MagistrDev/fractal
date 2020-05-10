@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 14:19:06 by ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 23:01:25 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/10 04:19:40 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	*potok(void *www)
 	t_window	*win;
 
 	win = (t_window*)www;
+	draw_fractal(win);
 	mlx_loop(win->mlx_ptr);
 	pthread_exit(0);
 }
@@ -67,15 +68,47 @@ void	*potok2(void *www)
 
 int		main(int argc, char **argv)
 {
-	t_window		win;
-	t_thread		t[3];
+	t_window	win[3];
+	t_thread	t[4];
+	char		*buf;
+	char		**st;
+	int			i;
 
-	create_win(&win, argc, argv);
-	pthread_attr_init(&t[0].attr);
-	pthread_create(&t[0].tid, &t[0].attr, potok, (void*)&win);
-	pthread_attr_init(&t[1].attr);
-	pthread_create(&t[1].tid, &t[1].attr, potok2, (void*)&win);
-	pthread_join(t[0].tid, NULL);
-	pthread_join(t[1].tid, NULL);
+	i = 0;
+	if ((argc == 2) && (ft_strequ("1", argv[1]) || ft_strequ("2", argv[1]) ||\
+		ft_strequ("3", argv[1])))
+	{
+		win[0].fractal = ft_atoi(argv[1]);
+		create_win(&win[0], argc, argv);
+		pthread_attr_init(&t[0].attr);
+		pthread_create(&t[0].tid, &t[0].attr, potok, (void*)&win[0]);
+		t[3].flag = 1;
+		while (t[3].flag)
+		{
+			get_next_line(0, &buf);
+			if (ft_strequ(buf,"quit"))
+				quit(&win[0]);
+			else
+			{
+				st = ft_strsplit(buf,' ');
+				while(*(st+i))
+					i++;
+				if (i == 1 && ft_strequ(st[0],"quit"))
+					quit(&win[0]);
+				ft_putnbr(i);
+				ft_arrdel(&st, i);
+				i = 0;
+			}
+			free(buf);
+			
+		}
+		
+		pthread_join(t[0].tid, NULL);
+	}
+	else
+	{
+		write(1, "You use : ./fractol [num_fractal]\n", 34);
+		write(1, "\t1\tMandelbrot\n\t2\tJulia\n\t3\tBurningship\n", 38);
+	}
 	return (0);
 }

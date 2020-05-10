@@ -1,0 +1,9 @@
+You use : ./fractol [num_fractal] [num_fractal] [num_fractal] [sq_width]
+	1	Mandelbrot
+	2	Julia
+	3	Burningship
+
+
+
+command		
+create 

@@ -6,11 +6,18 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/02 16:44:07 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 23:08:07 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/10 04:16:41 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	quit(t_window *win)
+{
+	mlx_destroy_image(win->mlx_ptr, win->img_ptr);
+	mlx_destroy_window(win->mlx_ptr,win->win_ptr);
+	exit(0);
+}
 
 void	set_fractal(int key, t_window *win)
 {

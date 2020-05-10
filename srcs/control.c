@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:04:23 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 23:00:28 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/10 04:15:40 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		key_press(int key, t_window *win)
 {
 	if (key == ESC)
-		exit(0);
+		quit(win);
 	if (key == KEY_NUMPLU || key == ZERO)
 		win->iter += 5;
 	if (key == KEY_NUMMIN || key == NINE)
@@ -30,8 +30,6 @@ int		key_press(int key, t_window *win)
 		win->color.func = 1;
 	if (key == KEY_R)
 		win->color.func = 2;
-	if (key == KEY_C)
-		win->color.color = (win->color.color) ? 0 : 0xffffff;
 	draw_fractal(win);
 	return (0);
 }

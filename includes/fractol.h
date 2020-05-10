@@ -6,7 +6,7 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 16:00:17 by Ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/09 22:55:13 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/05/10 04:17:04 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct			s_thread
 {
 	pthread_t		tid;
 	pthread_attr_t	attr;
+	int				flag;
 }						t_thread;
 
 typedef struct			s_window
@@ -92,5 +93,6 @@ int						mouse_release(int button, int x, int y, t_window *win);
 void					draw_fractal(t_window *win);
 void					scale(int x, int y, int sc, t_window *win);
 void					set_fractal(int key, t_window *win);
+void					quit(t_window *win);
 
 #endif
