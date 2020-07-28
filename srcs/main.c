@@ -6,23 +6,22 @@
 /*   By: ecelsa <ecelsa@studen.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 14:19:06 by ecelsa            #+#    #+#             */
-/*   Updated: 2020/05/10 04:19:40 by ecelsa           ###   ########.fr       */
+/*   Updated: 2020/07/28 16:08:34 by ecelsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	create_win(t_window *win, int argc, char **argv)
+void	create_win(t_window *win)
 {
-	(void)argc;
-	win->height = 600;
-	win->width = 600;
+	win->height = 1000;
+	win->width = 1000;
 	win->color.func = 0;
 	win->color.smooth = 0;
 	set_fractal(ONE, win);
 	win->mlx_ptr = mlx_init();
 	win->win_ptr = mlx_new_window(win->mlx_ptr, win->width,
-		win->height, argv[0]);
+		win->height, "1");
 	win->img_ptr = mlx_new_image(win->mlx_ptr, win->width, win->height);
 	win->img = (int*)mlx_get_data_addr(win->img_ptr, &win->bpp,
 		&win->size_line, &win->endian);
@@ -79,7 +78,7 @@ int		main(int argc, char **argv)
 		ft_strequ("3", argv[1])))
 	{
 		win[0].fractal = ft_atoi(argv[1]);
-		create_win(&win[0], argc, argv);
+		create_win(&win[0]);
 		pthread_attr_init(&t[0].attr);
 		pthread_create(&t[0].tid, &t[0].attr, potok, (void*)&win[0]);
 		t[3].flag = 1;
